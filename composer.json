@@ -1,0 +1,17 @@
+{
+    "name": "bazissoft/gallery-app",
+    "description": "Image gallery management application",
+    "require": {
+        "aws/aws-sdk-php": "^3.0"
+    },
+    "config": {
+        "platform": {
+            "php": "8.3.6"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    }
+}

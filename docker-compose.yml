@@ -1,0 +1,31 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/var/www/html:cached
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_NAME: gallery_db
+      DB_USER: gallery_user
+      DB_PASS: gallery_pass
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: gallery_db
+      MYSQL_USER: gallery_user
+      MYSQL_PASSWORD: gallery_pass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
